@@ -33,27 +33,28 @@ class RegisteredUserController extends Controller
         ]);
 
 
-
         event(new Registered($user));
-        Auth::login($user);
+        // Auth::login($user);
 
-        // return response()->noContent();
 
-        return response()->json([
-            'token' => $user->createToken('auth_token'),
-        ]);
+        return response()->noContent();
+
+        // return response()->json([
+        //     'token' => $user->createToken('auth_token'),
+        // ]);
     }
 
     public function checkEmailAvailability(Request $request)
     {
-        info('yes');
-        $email = $request->query('email');
+        info('email');
+        $request->validate([
+            'email' => 'required|email',
+        ]);
 
-        $email = strtolower($request->input('email'));
-
+        $email = strtolower($request->email);
         // the `exist() method return a boolean of `true or false`
-        $user = User::where('email', $email)->exists();
+        $isAvailable = !User::where('email', $email)->exists();
 
-        return response()->json(['available' => !$user]);
+        return response()->json(['available' => $isAvailable]);
     }
 }

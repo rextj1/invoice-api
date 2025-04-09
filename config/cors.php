@@ -26,7 +26,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'https://app.invoices.com:3000')],
+    'allowed_origins' => [env('FRONTEND_URL', 'http://app.invoice.test:3000')],
 
     'allowed_origins_patterns' => [],
 

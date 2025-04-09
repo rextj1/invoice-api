@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MediaUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,14 @@ Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1', 'm
     Route::apiResource('invoices', InvoiceController::class);
     
     Route::post('invoices/bulk', ['uses' => 'InvoiceController@bulkStore']);
+});
+
+Route::post('/uploadMedia', [MediaUploadController::class, 'uploadMedia']);
+Route::get('/media', [MediaUploadController::class, 'getUploadedFiles']);
+
+
+
+
+Route::get('/', function () {
+    return view('welcome');
 });
